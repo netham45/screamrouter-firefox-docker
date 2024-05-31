@@ -8,8 +8,8 @@ This container will output 16-bit 44.1kHz PCM audio encapsulated in an RTP strea
 
 ## Usage
 
-1. Clone the repo ```git clone https://github.com/netham45/firefox-docker.git```
-2. On the computer running Screamrouter, build the container image ```docker build firefox-docker/ -t firefox-docker```
-3. Make an instance of the container ```docker create -h "Firefox" firefox-docker```
+1. Clone the repo ```git clone https://github.com/netham45/screamrouter-firefox-docker.git```
+2. On the computer running Screamrouter, build the container image ```docker build screamrouter-firefox-docker/ -t screamrouter-firefox-docker```
+3. Make an instance of the container ```docker run -d -h "Firefox" screamrouter-firefox-docker```
 
 At this point ScreamRouter's Auto-Detection should pick up on the container and add it to the interface.

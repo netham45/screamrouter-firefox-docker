@@ -1,12 +1,17 @@
-#!/bin/bash -e
-rm -rf /tmp/* /run/dbus/pid || true
+#!/bin/bash
+rm -rf /tmp/* /tmp/.X* /run/dbus/pid /run/avahi-daemon/pid || true
 export PULSE_COOKIE=/var/run/pulse/.config/pulse/cookie
-export DISPLAY=:0.0
 dbus-daemon --system
-avahi-daemon &
-pulseaudio --system --disallow-exit -D
+avahi-daemon -D
+pulseaudio --system --disallow-exit --use-pid-file=false -D
 pactl load-module module-rtp-send format=s16le channels=2 rate=44100 source=auto_null.monitor destination=$RTP_TARGET port=$RTP_PORT mtu=1164
-cd /app
-./xtigervnc.sh &
-./openbox.sh &
-firefox-esr
+Xtigervnc -desktop "$VNC_DESKTOP_NAME" -geometry "$VNC_GEOMETRY" -listen tcp -ac -SecurityTypes None -AlwaysShared -AcceptKeyEvents -AcceptPointerEvents -SendCutText -AcceptCutText :0 &
+sleep 2
+export DISPLAY=:0.0
+openbox &
+
+while x=x
+do
+    firefox-esr || true
+    sleep 1
+done
