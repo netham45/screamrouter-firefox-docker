@@ -1,7 +1,7 @@
 FROM debian
 RUN sed -i 's/ main/ main contrib non-free security/g' /etc/apt/sources.list.d/* && \
   apt-get update -y && \
-  apt-get install -y tigervnc-standalone-server openbox gstreamer1.0-plugins-good pulseaudio avahi-daemon firefox-esr && \
+  apt-get install -y tigervnc-standalone-server openbox gstreamer1.0-plugins-good pulseaudio avahi-daemon netcat-openbsd xdotool firefox-esr && \
   rm -rf /var/lib/apt/lists
 COPY app/ /app/
 COPY root/.config/openbox/ /root/.config/openbox/
